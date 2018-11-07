@@ -1,9 +1,11 @@
 package com.owenism.ajouprint;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,41 +24,40 @@ public class MainActivity extends ListActivity {
 
     List<String> item = null;
     List<String> path = null;
-    String rootDir =  Environment.getRootDirectory().getAbsolutePath(); // root dir 문자열
-
-    String curDir; // current dir 문자열 ////////////////////
+    String rootDir =  Environment.getExternalStorageDirectory().getAbsolutePath(); // root dir 문자열
+    String curDir;
 
     TextView mCurDir;
-    ListView mFileList; ///////////////////////////
+    ListView mFileList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, MODE_PRIVATE);
+        ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("파일 탐색기");
         this.mCurDir = (TextView) findViewById(R.id.tv_path);
         this.mFileList = (ListView) findViewById(android.R.id.list);
+
         getDir(this.rootDir);
     }
 
     private void getDir(String path){
-
+        ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, MODE_PRIVATE);
+        ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
         this.mCurDir.setText("현재위치: " + path);
         this.item = new ArrayList<String>();
         this.path = new ArrayList<String>();
         File f = new File(path);
         File[] files = f.listFiles();
-        Log.d("씨발좀 돼라", ""+files.length );
 
         if(!path.equals(this.rootDir)){
             this.item.add(this.rootDir);
             this.path.add(this.rootDir);
-
-
-
+            this.item.add("../");
+            this.path.add(f.getParent());
         }
-        this.item.add("../");
-        this.path.add(f.getParent());
+
         if(files != null) {
             for (int i = 0; i < files.length; i++) {
                 File file = files[i];
@@ -66,14 +67,6 @@ public class MainActivity extends ListActivity {
             }
         }
 
-//        Log.d("아이템 개수", ""+this.item.size());
-//        Log.d("패스 개수", ""+this.path.size());
-//        for(String item: this.item){
-//            Log.d("아이템들", item);
-//        }
-//        for(String item: this.path){
-//            Log.d("패스들", item);
-//        }
         ArrayAdapter<String> fileList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.item);
         this.mFileList.setAdapter(fileList);
     }
@@ -88,7 +81,7 @@ public class MainActivity extends ListActivity {
                 getDir(path.get(position));
             else {
                 new AlertDialog.Builder(this)
-                        .setIcon(R.mipmap.ic_launcher)
+                        .setIcon(R.mipmap.hung)
                         .setTitle("[" + file.getName() + "] folder can't be read!")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
