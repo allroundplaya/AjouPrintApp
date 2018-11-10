@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id){
 
-        File file = new File(path.get(position));
+        final File file = new File(path.get(position));
 
         if(file.isDirectory()) {
             if (file.canRead())
@@ -92,16 +93,29 @@ public class MainActivity extends ListActivity {
         }
 
         else{
-            new AlertDialog.Builder(this)
-                    .setIcon(R.mipmap.ic_launcher)
-                    .setTitle("["+ file.getName() + "]")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog, int which){
-                            //TODO Auto-generated method stub
-                        }
-                    }).show();
+//            new AlertDialog.Builder(this)
+//                    .setIcon(R.mipmap.ic_launcher)
+//                    .setTitle("["+ file.getName() + "]")
+//                    .setPositiveButton("OK", new DialogInterface.OnClickListener(){
+//                        public void onClick(DialogInterface dialog, int which){
+//                            //TODO Auto-generated method stub
+//                        }
+//                    }).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(file.getName() + "을(를) 선택하시겠습니까?");
+            builder.setCancelable(true);
+            builder.setTitle("파일 선택");
+            builder.setPositiveButton("예", new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialog, int which){
+                    Toast.makeText(MainActivity.this, file.getName()+" 테스트 중입니다.", Toast.LENGTH_SHORT).show();
 
+                }
+
+            });
+            builder.show();
         }
+
     }
 }
 
