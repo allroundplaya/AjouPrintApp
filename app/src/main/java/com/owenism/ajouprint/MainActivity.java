@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -44,6 +45,7 @@ public class MainActivity extends ListActivity {
     }
 
     private void getDir(String path){
+        this.curDir = path;
         ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, MODE_PRIVATE);
         ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
         this.mCurDir.setText("현재위치: " + path);
@@ -77,9 +79,14 @@ public class MainActivity extends ListActivity {
 
         final File file = new File(path.get(position));
 
+//        Toast.makeText(this, this.curDir, Toast.LENGTH_SHORT).show();
+
+
         if(file.isDirectory()) {
-            if (file.canRead())
+            if (file.canRead()) {
                 getDir(path.get(position));
+
+            }
             else {
                 new AlertDialog.Builder(this)
                         .setIcon(R.mipmap.hung)
@@ -105,11 +112,18 @@ public class MainActivity extends ListActivity {
             builder.setMessage(file.getName() + "을(를) 선택하시겠습니까?");
             builder.setCancelable(true);
             builder.setTitle("파일 선택");
+            builder.setNegativeButton("아니오", new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialog, int which){
+                    Toast.makeText(MainActivity.this, "아무일도 안일어나는지 테스트 중입니다.", Toast.LENGTH_SHORT).show();
+
+                }
+            });
             builder.setPositiveButton("예", new DialogInterface.OnClickListener(){
                 @Override
                 public void onClick(DialogInterface dialog, int which){
                     Toast.makeText(MainActivity.this, file.getName()+" 테스트 중입니다.", Toast.LENGTH_SHORT).show();
-
+                    startActivity(new Intent(getApplicationContext() , PrintSettingActivity.class));
                 }
 
             });
@@ -117,6 +131,22 @@ public class MainActivity extends ListActivity {
         }
 
     }
+
+    @Override
+    public void onBackPressed(){
+
+        final File file = new File(this.curDir);
+            if (this.curDir.equals(this.rootDir)){
+                super.onBackPressed();
+            }
+            else{
+                getDir(file.getParent());
+                Toast.makeText(this, "curDir: "+this.curDir+"\nrootDir: " +this.rootDir, Toast.LENGTH_SHORT).show();
+            }
+
+
+    }
+
 }
 
 
