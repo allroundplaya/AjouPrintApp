@@ -1,9 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation= "vertical">
 
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/direction"
+            android:layout_width="132dp"
+            android:layout_height="match_parent"
+            android:text="원본 문서 방향"
+            android:gravity = "center_vertical"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinner_direction"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="48dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/slide_num"
+            android:layout_width="132dp"
+            android:layout_height="match_parent"
+            android:gravity = "center_vertical"
+            android:text="한 면의 슬라이드 수"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinner_slide"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="48dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp">
+
+        <TextView
+            android:id="@+id/edge"
+            android:layout_width="132dp"
+            android:layout_height="match_parent"
+            android:gravity = "center_vertical"
+            android:text="경계선"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinner_edge"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="48dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="48dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/copy"
+            android:layout_width="132dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="복사본"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/spinner_copy"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="48dp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        app:srcCompat="@android:color/background_light" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginBottom="16dp"
+        android:text="인쇄 요청" />
+
+
+</LinearLayout>

@@ -132,6 +132,7 @@ public class MainActivity extends ListActivity {
 
     }
 
+
     @Override
     public void onBackPressed(){
 
@@ -141,7 +142,7 @@ public class MainActivity extends ListActivity {
             }
             else{
                 getDir(file.getParent());
-                Toast.makeText(this, "curDir: "+this.curDir+"\nrootDir: " +this.rootDir, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "curDir: "+this.curDir+"\nrootDir: " +this.rootDir, Toast.LENGTH_SHORT).show();
             }
 
 
