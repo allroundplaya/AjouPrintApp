@@ -34,8 +34,6 @@ public class MainActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, MODE_PRIVATE);
-        ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.mCurDir = (TextView) findViewById(R.id.tv_path);
@@ -46,8 +44,6 @@ public class MainActivity extends ListActivity {
 
     private void getDir(String path){
         this.curDir = path;
-        ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, MODE_PRIVATE);
-        ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, MODE_PRIVATE);
         this.mCurDir.setText("현재위치: " + path);
         this.item = new ArrayList<String>();
         this.path = new ArrayList<String>();
@@ -123,7 +119,12 @@ public class MainActivity extends ListActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which){
                     Toast.makeText(MainActivity.this, file.getName()+" 테스트 중입니다.", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext() , PrintSettingActivity.class));
+                    FileInfo fInfo = new FileInfo(file.getAbsolutePath(), file.getName());
+                    Intent i =  new Intent(getApplicationContext(), PrintSettingActivity.class);
+                    i.putExtra("testing", fInfo);
+                    startActivity(i);
+
+
                 }
 
             });
