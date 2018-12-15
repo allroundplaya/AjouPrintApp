@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class PrintSettingActivity extends Activity {
 
-    private String direction = "Í∞ÄÎ°ú";
+    private String direction = "∞°∑Œ";
     private int slideNum = 1;
     private int edgeCheck = 1;
     private int copy = 1;
@@ -25,22 +25,22 @@ public class PrintSettingActivity extends Activity {
         String temp = this.direction + this.slideNum;
 
         switch(temp){
-            case "Í∞ÄÎ°ú1":
+            case "∞°∑Œ1":
                 img.setImageResource(R.drawable.horizontal_1);
                 break;
-            case "Í∞ÄÎ°ú2":
+            case "∞°∑Œ2":
                 img.setImageResource(R.drawable.horizontal_2);
                 break;
-            case "Í∞ÄÎ°ú4":
+            case "∞°∑Œ4":
                 img.setImageResource(R.drawable.horizontal_4);
                 break;
-            case "ÏÑ∏Î°ú1":
+            case "ºº∑Œ1":
                 img.setImageResource(R.drawable.vertical_1);
                 break;
-            case "ÏÑ∏Î°ú2":
+            case "ºº∑Œ2":
                 img.setImageResource(R.drawable.vertical_2);
                 break;
-            case "ÏÑ∏Î°ú4":
+            case "ºº∑Œ4":
                 img.setImageResource(R.drawable.vertical_4);
                 break;
         }
@@ -50,14 +50,13 @@ public class PrintSettingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         this.fInfo = getIntent().getParcelableExtra("testing");
-        Toast.makeText(PrintSettingActivity.this, "Ï†úÏóêÏóêÎ∞ú"+ fInfo.getAbsPath(), Toast.LENGTH_SHORT).show();
 
         setContentView(R.layout.print_setting);
         Toast.makeText(this, "Print Setting Layout", Toast.LENGTH_SHORT).show();
 
-        final String[] direction = {"Í∞ÄÎ°ú", "ÏÑ∏Î°ú"};
+        final String[] direction = {"∞°∑Œ", "ºº∑Œ"};
         final Integer[] slides = {1, 2, 4};
-        final String[] edge = {"Ìè¨Ìï®", "ÎØ∏Ìè¨Ìï®"};
+        final String[] edge = {"∆˜«‘", "πÃ∆˜«‘"};
         final Integer[] copy = {1, 2, 3, 4};
 
         img= (ImageView) findViewById(R.id.imageView);
@@ -106,11 +105,11 @@ public class PrintSettingActivity extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch((String)parent.getSelectedItem()){
-                    case "Ìè¨Ìï®":
+                    case "∆˜«‘":
                         PrintSettingActivity.this.edgeCheck = 1;
                         showLayout(img);
                         break;
-                    case "ÎØ∏Ìè¨Ìï®":
+                    case "πÃ∆˜«‘":
                         PrintSettingActivity.this.edgeCheck = 0;
                         showLayout(img);
                         break;
@@ -138,12 +137,10 @@ public class PrintSettingActivity extends Activity {
                 PrintSettingActivity.this.fInfo.setInput(PrintSettingActivity.this.slideNum,
                         PrintSettingActivity.this.copy,
                         PrintSettingActivity.this.edgeCheck,
-                        201320212,
-                        "Ï°∞ÏùÄÏÑ±"
+                        201312345,
+                        "»´±Êµø"
                         );
-                Toast.makeText(PrintSettingActivity.this,
-                        "Input: " +PrintSettingActivity.this.fInfo.getInput() + "\nabs-path: "+ PrintSettingActivity.this.fInfo.getAbsPath(),
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText("«¡∏∞∆Æ∞° ø‰√ªµ«æ˙Ω¿¥œ¥Ÿ.").show();
             }
         });
     }
