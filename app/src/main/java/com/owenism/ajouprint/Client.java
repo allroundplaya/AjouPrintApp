@@ -9,22 +9,27 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
+import android.widget.Toast;
+
 public class Client {
     public final static String SERVER_ADDR = "192.168.22.190"; //蹂�寃� �븘�슂
+    public FileSender fs;
 
     public Client(String absPath, String printOpt){
         Socket socket = null;
 
         try {
             socket = new Socket(SERVER_ADDR, 5000); // socket(),connect();
-            System.out.println("Successfully connected to server.");
+            //System.out.println("Successfully connected to server.");
 
-            FileSender fs = new FileSender(socket, filename, printOpt);
-            fs.start();
-
+            fs = new FileSender(socket, absPath, printOpt);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void requestPrint(){
+        fs.start();
     }
 }
 
