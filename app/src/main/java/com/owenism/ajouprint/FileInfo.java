@@ -18,7 +18,7 @@ public class FileInfo implements Parcelable {
     public void setInput(int slideNum,
                          int copy, int border,
                          int id, String userName){
-        this.input = this.fileName + " " + Integer.toString((int)(Math.log(slideNum)/Math.log(2)))
+        this.input = Integer.toString((int)(Math.log(slideNum)/Math.log(2)))
                 + " " + Integer.toString(copy) + " " + Integer.toString(border) + " "
                 + Integer.toString(id) + "_" + userName;
     }

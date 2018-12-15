@@ -12,11 +12,10 @@ import java.net.Socket;
 public class Client {
     public final static String SERVER_ADDR = "192.168.22.190"; //蹂�寃� �븘�슂
 
-    public Client(){
+    public Client(String absPath, String printOpt){
         Socket socket = null;
 
         try {
-
             socket = new Socket(SERVER_ADDR, 5000); // socket(),connect();
             System.out.println("Successfully connected to server.");
 
