@@ -141,7 +141,7 @@ public class PrintSettingActivity extends Activity {
                         "홍길동"
                         );
                 Client client = new Client(fInfo.getAbsPath(), fInfo.getInput());
-                Toast.makeText("프린트가 요청되었습니다.").show();
+                Toast.makeText(PrintSettingActivity.this, "프린트가 요청되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }

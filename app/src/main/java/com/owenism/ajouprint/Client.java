@@ -19,7 +19,7 @@ public class Client {
             socket = new Socket(SERVER_ADDR, 5000); // socket(),connect();
             System.out.println("Successfully connected to server.");
 
-            FileSender fs = new FileSender(socket, filename, printOpt);
+            FileSender fs = new FileSender(socket, absPath, printOpt);
             fs.start();
 
         } catch (IOException e) {
