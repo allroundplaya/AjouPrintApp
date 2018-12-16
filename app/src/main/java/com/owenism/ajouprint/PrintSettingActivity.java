@@ -140,8 +140,13 @@ public class PrintSettingActivity extends Activity {
                         201312345,
                         "홍길동"
                         );
-                Client client = new Client(fInfo.getAbsPath(), fInfo.getInput());
-                client.requestPrint();
+                new Thread() {
+                	public void run() {
+                		Client client = new Client(fInfo.getAbsPath(), fInfo.getInput());
+                        client.requestPrint();
+                	}
+                }.start();
+
                 Toast.makeText(PrintSettingActivity.this, "프린트가 요청되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
