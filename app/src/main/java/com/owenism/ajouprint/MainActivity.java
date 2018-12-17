@@ -111,14 +111,14 @@ public class MainActivity extends ListActivity {
             builder.setNegativeButton("아니오", new DialogInterface.OnClickListener(){
                 @Override
                 public void onClick(DialogInterface dialog, int which){
-                    Toast.makeText(MainActivity.this, "아무일도 안일어나는지 테스트 중입니다.", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MainActivity.this, "아무일도 안일어나는지 테스트 중입니다.", Toast.LENGTH_SHORT).show();
 
                 }
             });
             builder.setPositiveButton("예", new DialogInterface.OnClickListener(){
                 @Override
                 public void onClick(DialogInterface dialog, int which){
-                    Toast.makeText(MainActivity.this, file.getName()+" 테스트 중입니다.", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MainActivity.this, file.getName()+" 테스트 중입니다.", Toast.LENGTH_SHORT).show();
                     FileInfo fInfo = new FileInfo(file.getAbsolutePath(), file.getName());
                     Intent i =  new Intent(getApplicationContext(), PrintSettingActivity.class);
                     i.putExtra("testing", fInfo);
@@ -140,6 +140,7 @@ public class MainActivity extends ListActivity {
         final File file = new File(this.curDir);
             if (this.curDir.equals(this.rootDir)){
                 super.onBackPressed();
+                ActivityCompat.finishAffinity(this);
             }
             else{
                 getDir(file.getParent());

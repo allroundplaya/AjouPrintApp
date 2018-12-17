@@ -32,7 +32,8 @@ public class SplashActivity extends Activity {
                 }
                 finally {
                     if (checkPermission()){
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        startActivity(new Intent(SplashActivity.this, UserInfoActivity.class));
                         finish();
                     }
                     else{
@@ -55,11 +56,11 @@ public class SplashActivity extends Activity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMISSION_REQUEST_CODE){
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                Intent i = new Intent(SplashActivity.this, MainActivity.class);
+//                Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                Intent i = new Intent(SplashActivity.this, UserInfoActivity.class);
                 startActivity(i);
                 finish();
-            }else {
-                Toast.makeText(SplashActivity.this, "되긴 되는 거냐?", Toast.LENGTH_SHORT).show();
+            }else{
                 finish();
                 System.exit(0);
             }

@@ -1,6 +1,8 @@
 package com.owenism.ajouprint;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -52,7 +54,6 @@ public class PrintSettingActivity extends Activity {
         this.fInfo = getIntent().getParcelableExtra("testing");
 
         setContentView(R.layout.print_setting);
-        Toast.makeText(this, "Print Setting Layout", Toast.LENGTH_SHORT).show();
 
         final String[] direction = {"가로", "세로"};
         final Integer[] slides = {1, 2, 4};
@@ -134,22 +135,45 @@ public class PrintSettingActivity extends Activity {
         btRequest.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v){
-                PrintSettingActivity.this.fInfo.setInput(PrintSettingActivity.this.slideNum,
-                        PrintSettingActivity.this.copy,
-                        PrintSettingActivity.this.edgeCheck,
-                        201312345,
-                        "홍길동"
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(PrintSettingActivity.this);
+                builder.setMessage("인쇄하시겠습니까?");
+                builder.setCancelable(true);
+                builder.setTitle("인쇄 요청");
+                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                    }
+                });
+                builder.setPositiveButton("예", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which){
+                        PrintSettingActivity.this.fInfo.setInput(PrintSettingActivity.this.slideNum,
+                                PrintSettingActivity.this.copy,
+                                PrintSettingActivity.this.edgeCheck,
+                                Integer.parseInt(UserInfoActivity.getStudentId()),
+                                UserInfoActivity.getStudentName()
                         );
+                        new Thread() {
+                            public void run() {
+                                Client client = new Client(fInfo.getAbsPath(), fInfo.getInput());
+                                client.requestPrint();
+                            }
+                        }.start();
+                        Toast.makeText(PrintSettingActivity.this, "프린트가 요청되었습니다.", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(PrintSettingActivity.this, MainActivity.class));
+                    }
 
-                new Thread() {
-                	public void run() {
-                		Client client = new Client(fInfo.getAbsPath(), fInfo.getInput());
-                        client.requestPrint();
-                	}
-                }.start();
+                });
+                builder.show();
 
 
-                Toast.makeText(PrintSettingActivity.this, "프린트가 요청되었습니다.", Toast.LENGTH_SHORT).show();
+
+//                Toast.makeText(PrintSettingActivity.this, ""+UserInfoActivity.getStudentId()+"\n"+UserInfoActivity.getStudentName(), Toast.LENGTH_SHORT).show();
+
+
+
+
             }
         });
     }
