@@ -32,12 +32,14 @@ public class SplashActivity extends Activity {
                 }
                 finally {
                     if (checkPermission()){
-//                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
                         startActivity(new Intent(SplashActivity.this, UserInfoActivity.class));
                         finish();
                     }
                     else{
-                        ActivityCompat.requestPermissions(SplashActivity.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+                        ActivityCompat.requestPermissions(SplashActivity.this,
+                                new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                                        Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                PERMISSION_REQUEST_CODE);
                     }
                 }
             }

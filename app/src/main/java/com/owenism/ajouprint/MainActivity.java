@@ -56,7 +56,6 @@ public class MainActivity extends ListActivity {
             this.item.add("../");
             this.path.add(f.getParent());
         }
-
         if(files != null) {
             for (int i = 0; i < files.length; i++) {
                 File file = files[i];
@@ -65,7 +64,6 @@ public class MainActivity extends ListActivity {
                 else item.add(file.getName());
             }
         }
-
         ArrayAdapter<String> fileList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.item);
         this.mFileList.setAdapter(fileList);
     }
@@ -74,14 +72,9 @@ public class MainActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id){
 
         final File file = new File(path.get(position));
-
-//        Toast.makeText(this, this.curDir, Toast.LENGTH_SHORT).show();
-
-
         if(file.isDirectory()) {
             if (file.canRead()) {
                 getDir(path.get(position));
-
             }
             else {
                 new AlertDialog.Builder(this)
@@ -89,21 +82,12 @@ public class MainActivity extends ListActivity {
                         .setTitle("[" + file.getName() + "] folder can't be read!")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // TODO Auto-generated method stub
                             }
                         }).show();
             }
         }
 
         else{
-//            new AlertDialog.Builder(this)
-//                    .setIcon(R.mipmap.ic_launcher)
-//                    .setTitle("["+ file.getName() + "]")
-//                    .setPositiveButton("OK", new DialogInterface.OnClickListener(){
-//                        public void onClick(DialogInterface dialog, int which){
-//                            //TODO Auto-generated method stub
-//                        }
-//                    }).show();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(file.getName() + "을(를) 선택하시겠습니까?");
             builder.setCancelable(true);
@@ -111,20 +95,15 @@ public class MainActivity extends ListActivity {
             builder.setNegativeButton("아니오", new DialogInterface.OnClickListener(){
                 @Override
                 public void onClick(DialogInterface dialog, int which){
-//                    Toast.makeText(MainActivity.this, "아무일도 안일어나는지 테스트 중입니다.", Toast.LENGTH_SHORT).show();
-
                 }
             });
             builder.setPositiveButton("예", new DialogInterface.OnClickListener(){
                 @Override
                 public void onClick(DialogInterface dialog, int which){
-//                    Toast.makeText(MainActivity.this, file.getName()+" 테스트 중입니다.", Toast.LENGTH_SHORT).show();
                     FileInfo fInfo = new FileInfo(file.getAbsolutePath(), file.getName());
                     Intent i =  new Intent(getApplicationContext(), PrintSettingActivity.class);
                     i.putExtra("testing", fInfo);
                     startActivity(i);
-
-
                 }
 
             });

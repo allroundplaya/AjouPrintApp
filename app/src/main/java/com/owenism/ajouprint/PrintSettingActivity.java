@@ -166,14 +166,6 @@ public class PrintSettingActivity extends Activity {
 
                 });
                 builder.show();
-
-
-
-//                Toast.makeText(PrintSettingActivity.this, ""+UserInfoActivity.getStudentId()+"\n"+UserInfoActivity.getStudentName(), Toast.LENGTH_SHORT).show();
-
-
-
-
             }
         });
     }

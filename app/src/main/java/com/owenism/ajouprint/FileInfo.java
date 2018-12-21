@@ -1,7 +1,7 @@
 package com.owenism.ajouprint;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+        import android.os.Parcel;
+        import android.os.Parcelable;
 
 public class FileInfo implements Parcelable {
 

@@ -12,7 +12,7 @@ import java.net.Socket;
 import android.widget.Toast;
 
 public class Client {
-    public final static String SERVER_ADDR = "192.168.22.190"; //蹂�寃� �븘�슂
+    public final static String SERVER_ADDR = "192.168.21.247";
     public FileSender fs;
 
     public Client(String absPath, String printOpt){
